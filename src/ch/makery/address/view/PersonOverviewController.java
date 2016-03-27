@@ -74,6 +74,16 @@ public class PersonOverviewController {
      * 
      * @param mainApp
      */
+    
+    /**
+     * Chamado quando o usuário clica no botão delete.
+     */
+    @FXML
+    private void handleDeletePerson() {
+        int selectedIndex = personTable.getSelectionModel().getSelectedIndex();
+        personTable.getItems().remove(selectedIndex);
+    }
+    
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
 
