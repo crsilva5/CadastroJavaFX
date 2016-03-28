@@ -81,7 +81,16 @@ public class PersonOverviewController {
     @FXML
     private void handleDeletePerson() {
         int selectedIndex = personTable.getSelectionModel().getSelectedIndex();
-        personTable.getItems().remove(selectedIndex);
+        if (selectedIndex >= 0) {
+            personTable.getItems().remove(selectedIndex);
+        } else {
+            // Nada selecionado.
+            Dialogs.create()
+                .title("Nenhuma seleção")
+                .masthead("Nenhuma Pessoa Selecionada")
+                .message("Por favor, selecione uma pessoa na tabela.")
+                .showWarning();
+        }
     }
     
     public void setMainApp(MainApp mainApp) {
