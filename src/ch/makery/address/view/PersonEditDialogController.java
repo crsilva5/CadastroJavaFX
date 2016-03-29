@@ -10,7 +10,7 @@ import ch.makery.address.model.Person;
 import ch.makery.address.util.DateUtil;
 
 /**
- * Dialog para editar detalhes de uma pessoa.
+ * Dialog to edit details of a person.
  * 
  * @author Marco Jakob
  */
@@ -35,15 +35,15 @@ public class PersonEditDialogController {
     private boolean okClicked = false;
 
     /**
-     * Inicializa a classe controlle. Este método é chamado automaticamente
-     * após o arquivo fxml ter sido carregado.
+     * Initializes the controller class. This method is automatically called
+     * after the fxml file has been loaded.
      */
     @FXML
     private void initialize() {
     }
 
     /**
-     * Define o palco deste dialog.
+     * Sets the stage of this dialog.
      * 
      * @param dialogStage
      */
@@ -52,7 +52,7 @@ public class PersonEditDialogController {
     }
 
     /**
-     * Define a pessoa a ser editada no dialog.
+     * Sets the person to be edited in the dialog.
      * 
      * @param person
      */
@@ -69,7 +69,7 @@ public class PersonEditDialogController {
     }
 
     /**
-     * Retorna true se o usuário clicar OK,caso contrário false.
+     * Returns true if the user clicked OK, false otherwise.
      * 
      * @return
      */
@@ -78,7 +78,7 @@ public class PersonEditDialogController {
     }
 
     /**
-     * Chamado quando o usuário clica OK.
+     * Called when the user clicks ok.
      */
     @FXML
     private void handleOk() {
@@ -96,7 +96,7 @@ public class PersonEditDialogController {
     }
 
     /**
-     * Chamado quando o usuário clica Cancel.
+     * Called when the user clicks cancel.
      */
     @FXML
     private void handleCancel() {
@@ -104,55 +104,55 @@ public class PersonEditDialogController {
     }
 
     /**
-     * Valida a entrada do usuário nos campos de texto.
+     * Validates the user input in the text fields.
      * 
-     * @return true se a entrada é válida
+     * @return true if the input is valid
      */
     private boolean isInputValid() {
         String errorMessage = "";
 
         if (firstNameField.getText() == null || firstNameField.getText().length() == 0) {
-            errorMessage += "Nome inválido!\n"; 
+            errorMessage += "No valid first name!\n"; 
         }
         if (lastNameField.getText() == null || lastNameField.getText().length() == 0) {
-            errorMessage += "Sobrenome inválido!\n"; 
+            errorMessage += "No valid last name!\n"; 
         }
         if (streetField.getText() == null || streetField.getText().length() == 0) {
-            errorMessage += "Rua inválida!\n"; 
+            errorMessage += "No valid street!\n"; 
         }
 
         if (postalCodeField.getText() == null || postalCodeField.getText().length() == 0) {
-            errorMessage += "Código Postal inválido!\n"; 
+            errorMessage += "No valid postal code!\n"; 
         } else {
-            // tenta converter o código postal em um int.
+            // try to parse the postal code into an int.
             try {
                 Integer.parseInt(postalCodeField.getText());
             } catch (NumberFormatException e) {
-                errorMessage += "Código Postal inválido (deve ser um inteiro)!\n"; 
+                errorMessage += "No valid postal code (must be an integer)!\n"; 
             }
         }
 
         if (cityField.getText() == null || cityField.getText().length() == 0) {
-            errorMessage += "Cidade inválida!\n"; 
+            errorMessage += "No valid city!\n"; 
         }
 
         if (birthdayField.getText() == null || birthdayField.getText().length() == 0) {
-            errorMessage += "Aniversário inválido!\n";
+            errorMessage += "No valid birthday!\n";
         } else {
             if (!DateUtil.validDate(birthdayField.getText())) {
-                errorMessage += "Aniversário inválido. Use o formato dd.mm.yyyy!\n";
+                errorMessage += "No valid birthday. Use the format dd.mm.yyyy!\n";
             }
         }
 
         if (errorMessage.length() == 0) {
             return true;
         } else {
-            // Mostra a mensagem de erro.
-            Dialogs.create()
-                .title("Campos Inválidos")
-                .masthead("Por favor, corrija os campos inválidos")
-                .message(errorMessage)
-                .showError();
+            // Show the error message.
+        	Dialogs.create()
+		        .title("Invalid Fields")
+		        .masthead("Please correct invalid fields")
+		        .message(errorMessage)
+		        .showError();
             return false;
         }
     }
